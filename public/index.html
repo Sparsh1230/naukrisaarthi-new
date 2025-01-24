@@ -4,12 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Naukri Saarthi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
 </head>
 <body>
     <h1>Welcome to Naukri Saarthi</h1>
-    <div>
-        <a href="/login">Login</a>
-        <a href="/signup">Sign Up</a>
-    </div>
+    <p>Server Status: <span id="status">Checking...</span></p>
+
+    <script>
+        fetch('/api/health')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('status').textContent = 'Online';
+            })
+            .catch(error => {
+                document.getElementById('status').textContent = 'Offline';
+            });
+    </script>
 </body>
 </html>
